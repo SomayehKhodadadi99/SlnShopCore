@@ -1,5 +1,6 @@
 ﻿using Application.Catalogs.CatalogTypes.CrudService;
 using Application.Interfaces.Contexts;
+using EndPoint.MappingProfiles;
 using Infrastructure;
 using Infrastructure.MappingProfile;
 using Microsoft.AspNetCore.Builder;
@@ -38,6 +39,7 @@ builder.Services.AddAuthorization();
 
 //با اضافه کردن پکیج اتومپر دیپند
 builder.Services.AddAutoMapper(typeof(CatalogMappingProfile));
+builder.Services.AddAutoMapper(typeof(CatalogVMMappingProfile));
 
 
 builder.Services.ConfigureApplicationCookie(option =>

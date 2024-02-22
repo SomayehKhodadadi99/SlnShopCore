@@ -23,9 +23,13 @@
         <td> type:  @item.Type </td> |
         <td>ChildrenCount: @item.ChildrenCount  </td>
 
-        <td><a asp-action="edit" class="dt-button buttons-print btn" style="color:red" asp-route-id="@item.Id"> | ویرایش</a></td>
-        <td> <a asp-action="delete" class="dt-button buttons-print btn" style="color:red" asp-route-id="@item.Id"> | حذف</a> </td>
-        <td>  <a asp-action="create" class="dt-button buttons-print btn" style="color:red" asp-route-parentId="@item.Id">افزودن فرزند | </a></td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", "CategoryType", new { area = "Admin",Id=item.Id }, null) |
+     
+            
+        </td>
+        <td>  @Html.ActionLink("Delete", "Delete", "CategoryType", new { area = "Admin", Id = item.Id }, null) |</td>
+        <td>  @Html.ActionLink("Add Child", "Create", "CategoryType", new { area = "Admin",  Id = item.Id }, null) |</td>
         <td>   <a asp-action="index" class="dt-button buttons-print btn" style="color:red" asp-route-parentid="@item.Id">لیست فرزند ها |</a></td>
           
             

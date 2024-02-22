@@ -1,0 +1,38 @@
+﻿
+@model EndPoint.ViewModels.Catalogs.CatalogTypeViewModel;
+
+
+<div class="col-lg-12 col-12 layout-spacing">
+    <div class="statbox widget box box-shadow">
+        <div class="widget-header">
+            <div class="row">
+                <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                    <h4> ویرایش دسته بندی </h4>
+                </div>
+            </div>
+        </div>
+        <div class="widget-content widget-content-area">
+            <form asp-page="edit" method="post">
+         
+
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-4">
+                    
+                    @Html.LabelFor(model => model.Type);
+                    @Html.TextBoxFor(model => model.Type);
+                    <span asp-validation-for="CatalogType.Type" class="text-danger"></span>
+                </div>
+                @Html.TextBoxFor(model => model.Id);
+                <input type="submit" name="time" value="ثبت" class="btn btn-primary">
+                <a asp-page="index" class="btn btn-info">برگشت به لیست</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
