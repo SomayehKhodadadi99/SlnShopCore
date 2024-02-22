@@ -40,10 +40,15 @@ namespace Persistence.Contexts
             {
                 if (entityType.ClrType.GetCustomAttributes(typeof(AuditableAttribute), true).Length > 0)
                 {
-                    builder.Entity(entityType.Name).Property<DateTime>("InsertTime");
+                    //insert time va isRemove ,null able nistan
+                    //pas nemitoone khali bashan moghe seed
+                    //bayad has default value bedim
+                    //ama baghye mohem nistan chon nullable hastan
+
+                    builder.Entity(entityType.Name).Property<DateTime>("InsertTime").HasDefaultValue(DateTime.Now); 
                     builder.Entity(entityType.Name).Property<DateTime?>("UpdateTime");
                     builder.Entity(entityType.Name).Property<DateTime?>("RemoveTime");
-                    builder.Entity(entityType.Name).Property<bool>("IsRemoved");
+                    builder.Entity(entityType.Name).Property<bool>("IsRemoved").HasDefaultValue(false); ;
                 }
             }
 

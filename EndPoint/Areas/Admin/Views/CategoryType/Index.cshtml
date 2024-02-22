@@ -1,0 +1,35 @@
+﻿@using Application.DTOGeneral;
+
+@model PaginatedItemsDto<CatalogTypeListDto>;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<div class="dt-buttons">
+
+   @*  <a asp-action="Create" class="btn btn-success form-control"> Add 5 </a>
+    <a  asp-area="Admin" asp-controller="CategoryType" asp-action="Create">Create New</a> *@
+    @Html.ActionLink("Create New", "Create", "CategoryType", new { area = "Admin" }, null)
+   
+</div>
+@foreach (var item in Model.Data)
+{
+    <tr role="row">
+        <td>id:  @item.Id</td> |
+        <td> type:  @item.Type </td> |
+        <td>ChildrenCount: @item.ChildrenCount  </td>
+
+        <td><a asp-action="edit" class="dt-button buttons-print btn" style="color:red" asp-route-id="@item.Id"> | ویرایش</a></td>
+        <td> <a asp-action="delete" class="dt-button buttons-print btn" style="color:red" asp-route-id="@item.Id"> | حذف</a> </td>
+        <td>  <a asp-action="create" class="dt-button buttons-print btn" style="color:red" asp-route-parentId="@item.Id">افزودن فرزند | </a></td>
+        <td>   <a asp-action="index" class="dt-button buttons-print btn" style="color:red" asp-route-parentid="@item.Id">لیست فرزند ها |</a></td>
+          
+            
+       
+    </tr>
+}
+

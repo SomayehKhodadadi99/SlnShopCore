@@ -17,10 +17,10 @@ namespace Application.Catalogs.CatalogTypes.CrudService
         private readonly IDataBaseContext context;
         private readonly IMapper mapper;
 
-        public CatalogTypeService(IDataBaseContext context, IMapper mapper)
+        public CatalogTypeService(IDataBaseContext _context, IMapper _mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            context = _context;
+            mapper = _mapper;
         }
 
         public BaseDto<CatalogTypeDto> Add(CatalogTypeDto catalogType)
@@ -37,7 +37,7 @@ namespace Application.Catalogs.CatalogTypes.CrudService
                mapper.Map<CatalogTypeDto>(model),
                true,
                new List<string> { $"تایپ {model.Type}  با موفقیت در سیستم ثبت شد" }
-            
+
              );
         }
 
@@ -54,7 +54,7 @@ namespace Application.Catalogs.CatalogTypes.CrudService
             return new BaseDto<CatalogTypeDto>
               (
                  mapper.Map<CatalogTypeDto>(model)
-               ,true,
+               , true,
                 new List<string> { $"تایپ {model.Type} با موفقیت ویرایش شد" }
               );
         }
@@ -67,7 +67,7 @@ namespace Application.Catalogs.CatalogTypes.CrudService
             var result = mapper.Map<CatalogTypeDto>(data);
 
             return new BaseDto<CatalogTypeDto>(result, true, null);
-                
+
         }
 
         public BaseDto Remove(int Id)
@@ -79,11 +79,13 @@ namespace Application.Catalogs.CatalogTypes.CrudService
             (
              true,
              new List<string> { $"ایتم با موفقیت حذف شد" }
-       
+
        );
         }
 
         public PaginatedItemsDto<CatalogTypeListDto> GetList(int? parentId, int page, int pageSize)
+        
+        
         {
             int totalCount = 0;
 
@@ -92,9 +94,15 @@ namespace Application.Catalogs.CatalogTypes.CrudService
 
             //IQueryable<T> PagedResult
 
+            //model   --> CatalogType
+
             var model = context.CatalogTypes
-                .Where(p => p.ParentCatalogTypeId == parentId)
+                .Where(p => p.ParentCatalogTypeId == parentId).AsQueryable()
                    .PagedResult(page, pageSize, out totalCount);
+
+            //CatalogType ---> CatalogTypeListDto
+
+            //ProjectTo<Distination>(source)   ----> source IQueryable
 
             var result = mapper.ProjectTo<CatalogTypeListDto>(model).ToList();
 

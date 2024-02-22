@@ -11,6 +11,6 @@ namespace Application.DTOGeneral
         public int Id { get; set; }
         public string Type { get; set; }
         // تعداد فرزندان
-        public int SubTypeCount { get; set; }
+        public int ChildrenCount { get; set; }
     }
 }
