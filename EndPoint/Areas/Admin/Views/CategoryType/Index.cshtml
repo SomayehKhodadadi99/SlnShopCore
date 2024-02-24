@@ -16,24 +16,43 @@
     @Html.ActionLink("Create New", "Create", "CategoryType", new { area = "Admin" }, null)
    
 </div>
+<div style="background-color:aquamarine">
+    <tr>
+        <td style="background-color:palegreen;width:200px">id</td>
+        <td width="100px">ChildrenCount</td>
+        <td width="100px">type</td>
+
+
+    </tr>
+
+</div>
 @foreach (var item in Model.Data)
 {
+    <div style="background-color:aqua">
     <tr role="row">
-        <td>id:  @item.Id</td> |
-        <td> type:  @item.Type </td> |
-        <td>ChildrenCount: @item.ChildrenCount  </td>
-
-        <td>
-            @Html.ActionLink("Edit", "Edit", "CategoryType", new { area = "Admin",Id=item.Id }, null) |
-     
-            
-        </td>
-        <td>  @Html.ActionLink("Delete", "Delete", "CategoryType", new { area = "Admin", Id = item.Id }, null) |</td>
-        <td>  @Html.ActionLink("Add Child", "Create", "CategoryType", new { area = "Admin",  Id = item.Id }, null) |</td>
-        <td>   <a asp-action="index" class="dt-button buttons-print btn" style="color:red" asp-route-parentid="@item.Id">لیست فرزند ها |</a></td>
-          
-            
-       
+ 
+            <td width="100px">  @item.Id</td> |
+            <td width="100px">  @item.Type </td> |
+            <td width="100px"> @item.ChildrenCount  </td>
+  
+                <td width="100px">
+                        @Html.ActionLink("Edit", "Edit", "CategoryType", new { area = "Admin",Id=item.Id }, null) |
+                </td>
+                <td width="100px">
+                        @Html.ActionLink("Delete", "Delete", "CategoryType", new { area = "Admin", Id = item.Id }, null) |
+                </td>
+                <td width="100px">
+                @Html.ActionLink("Add Child", "Create", "CategoryType", new { area = "Admin", ParentCatalogTypeId = item.Id }, null) |
+                </td>
+                <td width="100px">
+                @Html.ActionLink("Show Child", "Index", "CategoryType", new { area = "Admin", ParentId = item.Id }, null) |
+                </td>  
     </tr>
+    </div>
 }
+
+@* 
+<td width="100px">  @item.Id</td> |
+<td width="100px">  @item.Type </td> |
+<td width="100px"> @item.ChildrenCount  </td> *@
 

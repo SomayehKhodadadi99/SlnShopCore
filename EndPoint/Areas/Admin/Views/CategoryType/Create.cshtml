@@ -13,7 +13,7 @@
 
         <div class="row p-3 border">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.HiddenFor(model => model.Id)
             <input type="hidden" asp-for="Id" />
 
             <div class="col-8 pt-4">

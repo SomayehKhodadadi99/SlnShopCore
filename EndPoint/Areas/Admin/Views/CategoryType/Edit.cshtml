@@ -23,7 +23,7 @@
                     @Html.TextBoxFor(model => model.Type);
                     <span asp-validation-for="CatalogType.Type" class="text-danger"></span>
                 </div>
-                @Html.TextBoxFor(model => model.Id);
+                @Html.HiddenFor(model => model.Id);
                 <input type="submit" name="time" value="ثبت" class="btn btn-primary">
                 <a asp-page="index" class="btn btn-info">برگشت به لیست</a>
             </form>

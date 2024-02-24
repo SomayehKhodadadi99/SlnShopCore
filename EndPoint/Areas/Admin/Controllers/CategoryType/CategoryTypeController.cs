@@ -6,6 +6,7 @@ using Domain.Catalogs;
 using EndPoint.Models.ViewModels.User.Login;
 using EndPoint.ViewModels.Catalogs;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Printing;
 
 namespace EndPoint.Areas.Admin.Controllers.CategoryType
 {
@@ -34,14 +35,14 @@ namespace EndPoint.Areas.Admin.Controllers.CategoryType
 
         
         [HttpGet]
-        public IActionResult Create(int? ParentId)
+        public IActionResult Create(int? ParentCatalogTypeId)
         {
             //CategoryTypeVM.ParentCatalogTypeId = ParentId;
             //return View(CategoryTypeVM);
 
             return View(new CatalogTypeViewModel
             {
-                ParentCatalogTypeId = ParentId
+                ParentCatalogTypeId = ParentCatalogTypeId
             }); ;
         }
         
@@ -55,7 +56,7 @@ namespace EndPoint.Areas.Admin.Controllers.CategoryType
            if (Result.IsSuccess)
             {
 
-                return RedirectToAction("index", new { parentid = frombody.ParentCatalogTypeId });
+                return RedirectToAction("index", new { ParentCatalogTypeId = frombody.ParentCatalogTypeId });
             }
            else
             {
@@ -95,33 +96,42 @@ namespace EndPoint.Areas.Admin.Controllers.CategoryType
             return RedirectToAction("index","CategoryType","Admin");
 
         }
-        [HttpDelete("{Id:int}")]
+
+        //[HttpGet]
+        //public ActionResult ShowChild(int ParentId)
+        //{
+
+        //    var CatalogList = catalogTypeService.GetList(ParentId, Page=1, PageSize=100);
+        //    return View(CatalogList);
+        //}
+
+        [HttpGet]
         public ActionResult Delete(int Id)
         {
             var model = catalogTypeService.FindById(Id);
             if (model.IsSuccess)
                 CatalogType = mapper.Map<CatalogTypeViewModel>(model.Data);
-            var result = catalogTypeService.Remove(Id);
-           
-            if (result.IsSuccess)
-            {
-                return RedirectToPage("index");
-            }
+            
 
-            return NoContent();
+            return View(CatalogType);
         }
 
 
-        //[HttpPost]
-        //public IActionResult Delete([FromBody]CatalogTypeViewModel fb)
-        //{
-        //    var result = catalogTypeService.Remove(fb.Id);
-        //    Message = result.Message;
-        //    if (result.IsSuccess)
-        //    {
-        //        return RedirectToPage("index");
-        //    }
-        //    return View(CatalogType);
-        //}
+        [HttpPost]
+        public IActionResult Delete( CatalogTypeViewModel fb)
+        {
+            var result = catalogTypeService.Remove(fb.Id);
+            Message = result.Message;
+            if (result.IsSuccess)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                Message = result.Message; 
+            
+            }
+            return NoContent();
+        }
     }
 }
