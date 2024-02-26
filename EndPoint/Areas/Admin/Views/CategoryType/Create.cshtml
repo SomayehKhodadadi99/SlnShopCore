@@ -49,5 +49,13 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Description', {
+            language: 'fa',
+            contentsLangDirection: 'rtl',
+            height: 270,
+        });
+    </script>
 
 }

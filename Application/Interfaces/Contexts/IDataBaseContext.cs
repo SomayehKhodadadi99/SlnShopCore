@@ -14,6 +14,7 @@ namespace Application.Interfaces.Contexts
         //برای دسترسی به دیتا بیس در لایه اپلیکیشن ، باید اینترفیس بسازیم
         DbSet<CatalogBrand> CatalogBrands { get; set; }
         DbSet<CatalogType> CatalogTypes { get; set; }
+         DbSet<CatalogItem> CatalogItems { get; set; }
 
         int SaveChanges();
         int SaveChanges(bool acceptAllChangesOnSuccess);

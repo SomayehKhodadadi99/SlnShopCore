@@ -1,0 +1,170 @@
+﻿@model EndPoint.ViewModels.Catalogs.AddNewCatalogItemViewModel;
+@{
+    var title = "Create Item";
+}
+
+
+<section class="card">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title-wrap bar-success">
+                        <h4 class="card-title mb-0">افزودن کاتالوگ جدید</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form id="createForm" class="form" asp-antiforgery="true">
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">نام کاتالوگ </label>
+                                    <input type="text" asp-for="@Model.Name" class="form-control" id="Name">
+                                    <span asp-validation-for="@Model.Name" class="text-danger"></span>
+                                </fieldset>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput"> برند </label>
+                                    <select class="form-control" id="Brand"  asp-items="@Model.CatalogBrandList"></select>
+                                  
+                                </fieldset>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">دسته بندی </label>
+
+                                    <select class="form-control" id="Category" asp-items="@Model.CatalogTypeList"></select>
+                                </fieldset>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput"> تعداد موجودی</label>
+                                    <input type="number" asp-for="@Model.AvailableStock" class="form-control" id="AvailableStock">
+                                    <span asp-validation-for="@Model.AvailableStock" class="text-danger"></span>
+
+                                </fieldset>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">حداقل برای سفارش مجدد</label>
+                                    <input type="number" asp-for="@Model.RestockThreshold" class="form-control" id="RestockThreshold">
+                                    <span asp-validation-for="@Model.RestockThreshold" class="text-danger"></span>
+
+                                </fieldset>
+                            </div>
+
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">حداکثر توان ذخیره در انبار</label>
+                                    <input type="number" asp-for="@Model.MaxStockThreshold" class="form-control" id="MaxStockThreshold">
+                                    <span asp-validation-for="@Model.MaxStockThreshold" class="text-danger"></span>
+                                </fieldset>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput"> قیمت</label>
+                                    <input type="number" asp-for="@Model.Price" class="form-control" id="Price">
+                                    <span asp-validation-for="@Model.Price" class="text-danger"></span>
+
+                                </fieldset>
+                            </div>
+                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput">تصاویر </label>
+                                    <input type="file" multiple class="form-control" accept="image/*" id="Images">
+                                </fieldset>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="card col-md-12">
+                            <div class="card-header col-md-12 row">
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <label for="basicInput"> نام گروه </label>
+                                        <input type="text" class="form-control" id="txtGroup" placeholder="نام گروه" />
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <label for="basicInput"> نام ویژگی </label>
+                                        <input type="text" class="form-control" id="txtDisplayName" placeholder="نام ویژگی" />
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <label for="basicInput"> مقدار ویژگی </label>
+                                        <input type="text" class="form-control" id="txtValue" placeholder="مقدار ویژگی" />
+                                    </fieldset>
+                                </div>
+                                <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
+                                    <fieldset class="form-group">
+                                        <br />
+                                        <a class="btn btn-success" id="btnAddFeatures">افزودن</a>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="card-body col-md-12">
+                                <table id="tbl_Features" class="col-md-12 table table-bordered table-hover  table-condensed table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                گروه
+                                            </th>
+                                            <th>
+                                                نام ویژگی
+                                            </th>
+                                            <th>
+                                                مقدار ویژگی
+                                            </th>
+                                            <th>
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card col-md-12 row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                                <fieldset class="form-group">
+                                    <label for="basicInput"> توضیحات</label>
+                                    <textarea id="Description" asp-for="@Model.Description" class="form-control " rows="5"></textarea>
+                                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
+                            <fieldset class="form-group">
+                                <button type="submit" class="btn btn-success col-md-12"> ثبت کاتالوگ</button>
+                            </fieldset>
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}

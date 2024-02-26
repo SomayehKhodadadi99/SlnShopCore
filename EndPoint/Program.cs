@@ -1,4 +1,7 @@
 ﻿using Application.Catalogs.CatalogTypes.CrudService;
+using Application.Catalogs.CatalohItems.AddNewCatalogItem;
+using Application.Catalogs.CatalohItems.CatalogItemServices;
+using Application.Catalogs.GetMenuItem;
 using Application.Interfaces.Contexts;
 using EndPoint.MappingProfiles;
 using Infrastructure;
@@ -54,6 +57,10 @@ builder.Services.ConfigureApplicationCookie(option =>
 
 
 builder.Services.AddTransient<ICatalogTypeService, CatalogTypeService>();
+builder.Services.AddTransient<IGetMenuItemService, GetMenuItemService>();
+builder.Services.AddTransient<IAddNewCatalogItemService, AddNewCatalogItemService>();
+builder.Services.AddTransient<ICatalogItemService, CatalogItemService>();
+
 var app = builder.Build();
 
 

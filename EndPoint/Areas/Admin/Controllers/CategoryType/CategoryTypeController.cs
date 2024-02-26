@@ -14,15 +14,15 @@ namespace EndPoint.Areas.Admin.Controllers.CategoryType
     public class CategoryTypeController : Controller
     {
         List<string> msg = new List<string>();
-        //CatalogTypeViewModel CategoryTypeVM = new CatalogTypeViewModel();
+    
         private readonly ICatalogTypeService catalogTypeService;
         private readonly IMapper mapper;
-        private readonly IDataBaseContext context;
-        public CategoryTypeController(ICatalogTypeService _catalogTypeService,IMapper _mapper,IDataBaseContext _context)
+        //private readonly IDataBaseContext context;
+        public CategoryTypeController(ICatalogTypeService _catalogTypeService,IMapper _mapper)
         {
             catalogTypeService = _catalogTypeService;
             mapper = _mapper;
-            context = _context;
+            //context = _context;
         }
         public PaginatedItemsDto<CatalogTypeListDto> CatalogList { get; set; }
 
@@ -73,7 +73,7 @@ namespace EndPoint.Areas.Admin.Controllers.CategoryType
         [HttpGet]
         public ActionResult Edit(int Id)
         {
-            var model=context.CatalogTypes.SingleOrDefault(c=>c.Id == Id);
+            //var model=context.CatalogTypes.SingleOrDefault(c=>c.Id == Id);
 
             BaseDto<CatalogTypeDto> result=catalogTypeService.FindById(Id);
 
