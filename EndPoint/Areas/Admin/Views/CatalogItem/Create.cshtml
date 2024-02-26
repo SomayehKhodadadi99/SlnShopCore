@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form id="createForm" class="form" asp-antiforgery="true">
+                    <form id="createForm" class="form" asp-antiforgery="true" asp-action="Create" method="post">
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
@@ -35,8 +35,8 @@
                             <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput">دسته بندی </label>
-
                                     <select class="form-control" id="Category" asp-items="@Model.CatalogTypeList"></select>
+                               
                                 </fieldset>
                             </div>
 

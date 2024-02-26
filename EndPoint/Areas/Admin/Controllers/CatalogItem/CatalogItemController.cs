@@ -37,11 +37,11 @@ namespace EndPoint.Areas.Admin.Controllers.CatalogItem
         public IActionResult Create()
         {
 
-            AddNewCatalogItemViewModel book = new AddNewCatalogItemViewModel();
-            book.CatalogTypeList = new SelectList(catalogItemService.GetCatalogType(), "Id", "Type");
-            book.CatalogBrandList = new SelectList(catalogItemService.GetBrand(), "Id", "Brand");
+            AddNewCatalogItemViewModel catalogItem = new AddNewCatalogItemViewModel();
+            catalogItem.CatalogTypeList = new SelectList(catalogItemService.GetCatalogType(), "Id", "Type");
+            catalogItem.CatalogBrandList = new SelectList(catalogItemService.GetBrand(), "Id", "Brand");
 
-            return View(book);
+            return View(catalogItem);
          
         }
 
