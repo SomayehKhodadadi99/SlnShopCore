@@ -1,8 +1,8 @@
-﻿@model EndPoint.ViewModels.Catalogs.AddNewCatalogItemViewModel;
+﻿@using EndPoint.ViewModels.Catalogs;
+@model AddNewCatalogItemViewModel;
 @{
     var title = "Create Item";
 }
-
 
 <section class="card">
     <div class="row">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form id="createForm" class="form" asp-antiforgery="true" asp-action="Create" method="post">
+                    <form id="createForm" onsubmit="return sendDataToServer(event)" class="form" asp-antiforgery="true">
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
                                 <fieldset class="form-group">
@@ -24,21 +24,27 @@
                                 </fieldset>
                             </div>
 
-                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
-                                <fieldset class="form-group">
-                                    <label for="basicInput"> برند </label>
-                                    <select class="form-control" id="Brand"  asp-items="@Model.CatalogBrandList"></select>
-                                  
-                                </fieldset>
+
+
+                            <div class="col-8">
+                                <label for="basicInput"> برند </label>
+                                <select asp-for="@Model.CatalogBrandId" class="form-select" id="Brand"  asp-items="@Model.CatalogBrandList">
+                                    <option disabled selected>--Select Villa--</option>
+                                </select>
+                                <span asp-validation-for="@Model.CatalogBrandId" class="text-danger"></span>
                             </div>
 
-                            <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
-                                <fieldset class="form-group">
-                                    <label for="basicInput">دسته بندی </label>
-                                    <select class="form-control" id="Category" asp-items="@Model.CatalogTypeList"></select>
-                               
-                                </fieldset>
+
+                            <div class="col-8">
+                                <label for="basicInput">دسته بندی </label>
+                                <select asp-for="@Model.CatalogTypeId" class="form-select" id="Category" asp-items="@Model.CatalogTypeList">
+                                    <option disabled selected>--Select Villa--</option>
+                                </select>
+
+                                <span asp-validation-for="@Model.CatalogTypeId" class="text-danger"></span>
                             </div>
+
+                      
 
                         </div>
                         <hr />
@@ -108,6 +114,8 @@
                                         <input type="text" class="form-control" id="txtValue" placeholder="مقدار ویژگی" />
                                     </fieldset>
                                 </div>
+                            
+
                                 <div class="col-xl-2 col-lg-6 col-md-12 mb-1">
                                     <fieldset class="form-group">
                                         <br />
@@ -142,14 +150,14 @@
                             <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
                                 <fieldset class="form-group">
                                     <label for="basicInput"> توضیحات</label>
-                                    <textarea id="Description" asp-for="@Model.Description" class="form-control " rows="5"></textarea>
-                                    <span asp-validation-for="@Model.Description" class="text-danger"></span>
+                                    <textarea id="Description" asp-for="Description" class="form-control " rows="5"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
                                 </fieldset>
                             </div>
                         </div>
                         <div class="col-xl-12 col-lg-12 col-md-12 mb-1">
                             <fieldset class="form-group">
-                                <button type="submit" class="btn btn-success col-md-12"> ثبت کاتالوگ</button>
+                                <button  type="submit" class="btn btn-success col-md-12"> ثبت کاتالوگ</button>
                             </fieldset>
                         </div>
 
@@ -164,7 +172,22 @@
 
 </section>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
 
+@section Scripts {
+    <link href="~/Sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/Sweetalert2/sweetalert2.min.js"></script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="https://cdn.ckeditor.com/4.13.0/standard-all/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace('Description', {
+            language: 'fa',
+            contentsLangDirection: 'rtl',
+            height: 270,
+        });
+    </script>
+
+ 
+  
 }

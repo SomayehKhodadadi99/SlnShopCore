@@ -4,7 +4,9 @@ using Application.Catalogs.CatalohItems.CatalogItemServices;
 using Application.Catalogs.GetMenuItem;
 using Application.Interfaces.Contexts;
 using EndPoint.MappingProfiles;
+using FluentValidation;
 using Infrastructure;
+using Infrastructure.ExternalApi.ImageServer;
 using Infrastructure.MappingProfile;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -60,6 +62,10 @@ builder.Services.AddTransient<ICatalogTypeService, CatalogTypeService>();
 builder.Services.AddTransient<IGetMenuItemService, GetMenuItemService>();
 builder.Services.AddTransient<IAddNewCatalogItemService, AddNewCatalogItemService>();
 builder.Services.AddTransient<ICatalogItemService, CatalogItemService>();
+builder.Services.AddTransient<IImageUploadService, ImageUploadService>();
+
+//fluentValidation
+builder.Services.AddTransient<IValidator<AddNewCatalogItemDto>, AddNewCatalogItemDtoValidator>();
 
 var app = builder.Build();
 

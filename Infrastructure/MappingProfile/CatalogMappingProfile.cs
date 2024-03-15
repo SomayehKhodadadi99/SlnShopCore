@@ -42,7 +42,7 @@ namespace Infrastructure.MappingProfile
             CreateMap<CatalogItem, AddNewCatalogItemDto>()
                 .ForMember(dest => dest.Features, opt =>
                 opt.MapFrom(src => src.CatalogItemFeatures))
-                 .ForMember(dest => dest.Images, opt =>
+                 .ForMember(dest => dest.ListSrcImages, opt =>
                  opt.MapFrom(src => src.CatalogItemImages)).ReverseMap();
 
             //-------------------

@@ -17,7 +17,7 @@ namespace Application.Catalogs.CatalohItems.AddNewCatalogItem
         public int RestockThreshold { get; set; }
         public int MaxStockThreshold { get; set; }
         public List<AddNewCatalogItemFeature_dto> Features { get; set; }
-        public List<AddNewCatalogItemImage_Dto> Images { get; set; }
+        public List<AddNewCatalogItemImage_Dto> ListSrcImages { get; set; }
 
     }
 }
